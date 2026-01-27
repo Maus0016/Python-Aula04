@@ -28,7 +28,7 @@ def criar (request, Setor, problema, prioridade, descricao):
     'descricao': descricao
 }
     chamados.append(novo)
-    return HttpResponse(f"<h1>Novo chamado criado com sucesso!</h1><p>Setor: {Setor}</p><p>Problema: {problema}</p><p>Prioridade: {prioridade}</p><p>Descrição: {descricao}</p>")
+    return HttpResponse(f"<h1>Novo chamado criado com sucesso!</h1><p>Setor: {Setor}</p><p>problema: {problema}</p><p>prioridade: {prioridade}</p><p>descrição: {descricao}</p>")
 
 
 

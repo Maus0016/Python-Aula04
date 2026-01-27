@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
     path('listar/', listar),
-    path('criar/<str:setor>/<str:problema>/<int:prioridade>/<str:descricao>/', criar),
+    path('criar/<str:Setor>/<str:problema>/<int:prioridade>/<str:descricao>/', criar),
 ]
