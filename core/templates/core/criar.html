@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Chamado</title>
+    <style>
+        /* Estilo geral */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 40px;
+        }
+
+        /* Cabeçalho */
+        h1 {
+            text-align: center;
+            color: #198754;
+            /* verde Bootstrap para sucesso */
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        /* Container do chamado */
+        .chamado-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Campos */
+        .chamado-box p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .chamado-box strong {
+            color: #0d6efd;
+            /* azul Bootstrap */
+        }
+
+        /* Botão voltar */
+        .btn-voltar {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-voltar a {
+            text-decoration: none;
+            background-color: #0d6efd;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-voltar a:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Novo chamado criado com sucesso!</h1>
+    <div class="chamado-box">
+        <p><strong>Setor:</strong> {{ Setor }}</p>
+        <p><strong>Problema:</strong> {{ problema }}</p>
+        <p><strong>Prioridade:</strong> {{ prioridade }}</p>
+        <p><strong>Descrição:</strong> {{ descricao }}</p>
+        
+    </div>
+
+    
+
+        <div class="btn-voltar"> <a href="/">Voltar para Home</a> </div>
+</body>
+
+</html>

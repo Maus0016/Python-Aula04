@@ -1,9 +1,10 @@
+from urllib import request
 from django.shortcuts import render
 
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("<h1>Hello World!</h1><p>Meu primeiro sistema Django está online.</p>")
+    return render(request, "core/home.html") 
 
 chamados = [
 
@@ -12,11 +13,8 @@ chamados = [
     {'Setor': 'Financeiro', 'problema': 'Falta de acesso ao sistema bancário', 'prioridade': 'Alta', 'descricao': 'Não consigo acessar o sistema bancário para realizar pagamentos.'},
 ]
 def listar (request):
-   html = "<h1>Listar Chamados</h1><ul>"
-   for chamado in chamados:
-       html += f"<li><strong>Setor: {chamado['Setor']} - Problema: {chamado['problema']} - Prioridade: {chamado['prioridade']} - Descrição: {chamado['descricao']}</li>"
-   html += "</ul>"
-   return HttpResponse(html)
+  
+   return render(request, "core/listar.html", {"chamados": chamados})
 
 def criar (request, Setor, problema, prioridade, descricao):
 
@@ -28,9 +26,43 @@ def criar (request, Setor, problema, prioridade, descricao):
     'descricao': descricao
 }
     chamados.append(novo)
-    return HttpResponse(f"<h1>Novo chamado criado com sucesso!</h1><p>Setor: {Setor}</p><p>problema: {problema}</p><p>prioridade: {prioridade}</p><p>descrição: {descricao}</p>")
+    return render(request, "core/criar.html", {"Setor": Setor, "problema": problema, "prioridade": prioridade, "descricao": descricao})
 
+def fechar (request, indice):
+    if 0 <= indice < len(chamados):
+        chamados.pop(indice)
+        request.method == 'POST'
+        request.method == 'GET'
+        request.method == 'DELETE'
+    return render(request, "core/fechar.html", {"message": "O chamado foi fechado com sucesso!"})
+    
+    
 
+def novoChamado (request):
+    if request.method == 'GET':
+        return render(request, "core/novoChamado.html")
+    
 
+    if request.method == 'POST':
+        Setor = request.POST.get('Setor')
+        problema = request.POST.get('problema')
+        prioridade = request.POST.get('prioridade')
+        descricao = request.POST.get('descricao')
+
+        print ("Chegou um post")
+        print ("Setor: {Setor}, problema: {problema}, prioridade: {prioridade}, descricao: {descricao}")
+
+        chamados.append(
+            "Setor: " Setor,
+            "problema: " problema,
+            "prioridade: " prioridade,
+            "descricao: " descricao
+        )
+        
+
+        return render(request, "core/criar.html", {"Setor": Setor, "problema": problema, "prioridade": prioridade, "descricao": descricao})
+
+  
+    return render(request, "core/novoChamado.html")
 
 # Create your views here.

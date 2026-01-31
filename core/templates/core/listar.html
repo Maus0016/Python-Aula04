@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% csrf_token %}
+{% block content %}
+
+<h1 class="mb-4">📋 Listar Chamados</h1>
+<b>{{ c.prioridade }}</b>
+
+<ul class="list-group"> {% for chamado in chamados %} <li class="list-group-item"> <strong>Setor:</strong> {{
+                chamado.Setor }} <br> <strong>Problema:</strong> {{ chamado.problema }} <br>
+                <strong>Prioridade:</strong> {{
+                chamado.prioridade }} <br> <strong>Descrição:</strong> {{ chamado.descricao }} </li> {% endfor %} </ul>
+
+{% endblock %}
+
+
+
+
+
+<!-- <details>
+        <summary>Instruções</summary>
+        <p>Para criar um novo chamado, clique em "Novo Chamado" no menu principal.</p>
+        <p>Para fechar um chamado existente, vá para a seção "Fechar Chamado" e selecione o chamado que deseja fechar.
+        </p> -->

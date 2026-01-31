@@ -19,10 +19,14 @@ from django.urls import path
 from core.views import home
 from core.views import listar
 from core.views import criar
+from core.views import fechar
+from core.views import novoChamado
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
     path('listar/', listar),
     path('criar/<str:Setor>/<str:problema>/<int:prioridade>/<str:descricao>/', criar),
+    path('novoChamado', novoChamado),
+    path('fechar/<int:indice>/', fechar),
 ]

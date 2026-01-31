@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h1>Novo Chamado</h1>
+{% csrf_token %}
+
+<form action="/criar" method="POST" class="p-3 border rounded bg-light">
+    {% csrf_token %}
+    <div class="mb-3"> <label for="setor" class="form-label">Setor</label> <input type="text" class="form-control"
+            id="setor" name="setor" required> </div>
+
+    <div class="mb-3"> <label for="problema" class="form-label">Problema</label> <input type="text" class="form-control"
+            id="problema" name="problema" required> </div>
+
+    <div class="mb-3"> <label for="prioridade" class="form-label">Prioridade</label> <select class="form-select"
+            id="prioridade" name="prioridade" required>
+            <option value="">Selecione uma prioridade</option>
+            <option value="Alta">Alta</option>
+            <option value="Média">Média</option>
+            <option value="Baixa">Baixa</option>
+        </select> </div>
+
+    <div class="mb-3"> <label for="descricao" class="form-label">Descrição</label> <textarea class="form-control"
+            id="descricao" name="descricao" rows="3" required></textarea> </div>
+    <button type="submit" class="btn btn-primary">Criar Chamado</button>
+</form>
+
+<form action="/novoChamado" method="GET" class="mt-3">
+</form>
+
+
+<form action="/fechar" method="Delete" class="mt-3">
+    
+</form>
+
+<div class="btn-voltar">
+    <a href="/">Voltar para Home</a>
+</div>
+{% endblock %}
+
+</html>
