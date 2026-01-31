@@ -1,5 +1,5 @@
 from urllib import request
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.http import HttpResponse
 
@@ -38,31 +38,24 @@ def fechar (request, indice):
     
     
 
-def novoChamado (request):
-    if request.method == 'GET':
-        return render(request, "core/novoChamado.html")
-    
-
-    if request.method == 'POST':
+def novoChamado(request):
+     if request.method == 'POST':
         Setor = request.POST.get('Setor')
         problema = request.POST.get('problema')
         prioridade = request.POST.get('prioridade')
         descricao = request.POST.get('descricao')
-
-        print ("Chegou um post")
-        print ("Setor: {Setor}, problema: {problema}, prioridade: {prioridade}, descricao: {descricao}")
-
-        chamados.append(
-            "Setor: " Setor,
-            "problema: " problema,
-            "prioridade: " prioridade,
-            "descricao: " descricao
-        )
         
-
-        return render(request, "core/criar.html", {"Setor": Setor, "problema": problema, "prioridade": prioridade, "descricao": descricao})
-
-  
-    return render(request, "core/novoChamado.html")
-
+        print("Chegou um POST")
+        print(f"Setor: {Setor}, problema: {problema}, prioridade: {prioridade}, descricao: {descricao}")
+        chamados.append({
+             "Setor": Setor,
+             "problema": problema,
+             "prioridade": prioridade, # ou "Media"
+             "descricao": descricao })
+        
+        return redirect('listar')
+        
+        if request.method == "GET":
+            print("Chegou um GET")
+            return render(request, 'core/novochamado.html')
 # Create your views here.
