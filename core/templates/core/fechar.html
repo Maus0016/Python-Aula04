@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% block content %}
+{% block fechar %}
 
 <body>
     <h1>Fechar Chamado</h1>
@@ -7,27 +7,23 @@
         {% for chamado in chamados %}
         <li>
 
-            <a href="/fechar/{{ forloop.counter0 }}/" class="btn btn-danger mt-2">Fechar Chamado</a>
-            <form method="post" class="p-3 border rounded bg-light mt-2 mb-4">
-            </form>
+
+            <a href="/fechar/" class="btn btn-danger mt-2">Fechar Chamado</a>
+            <form method="get"></form>
+
+            <form method="post"></form>
             {% csrf_token %}
-            
-            <input type="hidden" name="fechar_chamado" value="{{ forloop.counter0 }}">
+
+
+            <input type="hidden" name="fecharchamado">
         </li>
 
         {% endfor %}
     </ul>
 
-
-
-
-
-
-
-
-
-    <p>{{ message }}</p>
 </body>
 
 
 {% endblock %}
+
+excluir por que vai ser feito pelo listar

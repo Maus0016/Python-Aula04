@@ -5,10 +5,44 @@
 <h1 class="mb-4">📋 Listar Chamados</h1>
 <b>{{ c.prioridade }}</b>
 
-<ul class="list-group"> {% for chamado in chamados %} <li class="list-group-item"> <strong>Setor:</strong> {{
-                chamado.Setor }} <br> <strong>Problema:</strong> {{ chamado.problema }} <br>
-                <strong>Prioridade:</strong> {{
-                chamado.prioridade }} <br> <strong>Descrição:</strong> {{ chamado.descricao }} </li> {% endfor %} </ul>
+
+<ul class="list-group">
+
+        {% for chamado in chamados %}
+        <tr>
+                <table class="listar">
+                        <td>Setor: {{chamado.Setor }} </td>
+                        <td>Problema: {{ chamado.problema }}
+                        <td>
+                        <td>Prioridade: {{chamado.prioridade }}
+                        <td>
+                                {% if chamado.prioridade == "Alta" %}
+                                <span class="badge bg-danger">{{ chamado.prioridade }}</span>
+                                {% elif chamado.prioridade == "Média" %}
+                                <span class="badge bg-warning">{{ chamado.prioridade }}</span>
+                                {% else %}
+                                <span class="badge bg-primary">{{ chamado.prioridade }}</span>
+                                {% endif %}
+                        <td>
+                        <td>Descrição: {{ chamado.descricao }}
+
+                                {{ chamado.id }}
+                        <td>
+
+
+                        <td>
+                                <a href="{% url 'Exibirfechar' chamado.id %}" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Tem certeza que deseja apagar?')">
+                                        fecharchamado</a>
+                        </td>
+                </table>
+
+
+
+
+                {% endfor %}
+
+</ul>
 
 {% endblock %}
 
