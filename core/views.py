@@ -105,30 +105,25 @@ def listar (request):
   
    return render(request, "core/listar.html", {"chamados": chamados})
 
-def criar (request, Setor, problema, prioridade, descricao):
+def criar (request):
 
+    return render(request, "core/criar.html")
 
-    novo =  { 
-    'Setor': Setor,
-    'problema': problema,
-    'prioridade': prioridade,
-    'descricao': descricao
-}
-    chamados.append(novo)
-    return render(request, "core/criar.html", {"Setor": Setor, "problema": problema, "prioridade": prioridade, "descricao": descricao})
-
-def fechar (request, indice):
-    if 0 <= indice < len(chamados):
-        chamados.pop(indice)
-        request.method == 'POST'
-        request.method == 'GET'
-        request.method == 'DELETE'
+def fechar (request, id):
+    if 0 <= id < len(chamados):
+        chamados.pop(id)
+      
     return render(request, "core/fechar.html", {"message": "O chamado foi fechado com sucesso!"})
     
+def Exibirfechar (request, id):
+    if 0 <= id < len(chamados):
+        chamados.pop(id)
+    return render(request, "core/fechar.html", {"message": "O chamado foi fechado com sucesso!"})
     
 
 def novoChamado(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
+        id = request.POST.get('id')
         Setor = request.POST.get('Setor')
         problema = request.POST.get('problema')
         prioridade = request.POST.get('prioridade')
@@ -143,8 +138,10 @@ def novoChamado(request):
              "descricao": descricao })
         
         return redirect('listar')
+     
+    if request.method == "GET":
+        print("Chegou um GET")
+        return render(request, 'core/novochamado.html')
         
-        if request.method == "GET":
-            print("Chegou um GET")
-            return render(request, 'core/novochamado.html')
+       
 # Create your views here.
