@@ -1,14 +1,48 @@
-{% extends 'core/base.html' %}
+{% extends "core/base.html" %}
+
 
 {% block content %}
-<main>
-    <h1>Bem-vindo ao Sistema de Chamados</h1>
-    <p>Use o menu para navegar pelo sistema.</p>
-    <ul>
-        <li><a href="/listar/">Listar Chamados</a></li>
-        <li><a href="/fechar/">Fechar Chamado</a></li>
-        <li><a href="/criar/">Criar Chamado</a></li>
-        <li><a href="/novoChamado">Novo Chamado</a></li>
-    </ul>
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-body p-5">
+                    <h2 class="text-secondary mb-4">Status do Sistema</h2>
+
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <div>
+                            <strong>Sucesso!</strong> O servidor está rodando e os templates estão conectados.
+                        </div>
+                    </div>
+
+                    <p class="text-muted">
+                        Este é um exemplo de como o <strong>MVT</strong> separa as coisas.
+                        O Python apenas enviou os dados, enquanto o HTML e CSS cuidam de toda a beleza que você está
+                        vendo.
+                    </p>
+
+                    <hr>
+
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="/listar-chamados" class="btn btn-outline-secondary btn-lg px-4">Lista de chamados</a>
+                        <a href="/novoChamado" class="btn btn-outline-secondary btn-lg px-4">Novo chamado</a>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-block mt-3">
+                        <a href="/listar_categorias" class="btn btn-outline-primary btn-lg px-4">Lista de categorias</a>
+                        <a href="/nova_categoria" class="btn btn-outline-primary btn-lg px-4">Nova categoria</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+
+{% endblock %}
+
+
+{% block rodape %}
+<div class="text-center py-4 text-muted">
+    <small>&copy; 2026 - Sistema de Criação de Chamados - Rodapé Personalizado</small>
+</div>
 {% endblock %}
