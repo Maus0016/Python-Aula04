@@ -4,9 +4,9 @@ from django.shortcuts import render, redirect
 
 chamados = [
 #Banco de dados em memoria
-    {'Setor': 'TI', 'problema': 'Computador lento', 'prioridade': 'Alta', 'descricao': 'O computador está muito lento ao iniciar.'},
-    {'Setor': 'RH', 'problema': 'Erro no sistema de folha de pagamento', 'prioridade': 'Média', 'descricao': 'O sistema não está calculando os impostos corretamente.'},
-    {'Setor': 'Financeiro', 'problema': 'Falta de acesso ao sistema bancário', 'prioridade': 'Alta', 'descricao': 'Não consigo acessar o sistema bancário para realizar pagamentos.'},
+    {"id": 1, 'Setor': 'TI', 'problema': 'Computador lento', 'prioridade': 'Alta', 'descricao': 'O computador está muito lento ao iniciar.'},
+    {"id": 2, 'Setor': 'RH', 'problema': 'Erro no sistema de folha de pagamento', 'prioridade': 'Média', 'descricao': 'O sistema não está calculando os impostos corretamente.'},
+    {"id": 3,  'Setor': 'Financeiro', 'problema': 'Falta de acesso ao sistema bancário', 'prioridade': 'Alta', 'descricao': 'Não consigo acessar o sistema bancário para realizar pagamentos.'},
 ]
 
 categorias = [
@@ -38,7 +38,7 @@ def novoChamado(request):
         })
 
     #Redireciona de volta para a lista
-        return redirect('./listar')
+        return redirect('./listar_chamados')
 
 
     return render(request, "core/novoChamado.html")
@@ -49,7 +49,7 @@ def fechar(request, id):
             chamados.remove(chamado)
             break
 
-    return redirect('/listar')
+    return redirect('/listar_chamados')
 
 def listarChamados(request):
     return render(request, 'core/listar.html', {"chamados": chamados})      
@@ -66,7 +66,7 @@ def nova_categoria(request):
         })
         # salvar meus dados
         return redirect('/listar_categorias')
-    return render(request, 'core/nova_categoria.html')
+    return render(request, 'core/novaCategoria.html')
 
 def excluir_categoria(request, id):
     for categoria in categorias:
@@ -75,73 +75,3 @@ def excluir_categoria(request, id):
             break
     return redirect('/listar_categorias')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def listar (request):
-  
-   return render(request, "core/listar.html", {"chamados": chamados})
-
-def criar (request):
-
-    return render(request, "core/criar.html")
-
-def fechar (request, id):
-    if 0 <= id < len(chamados):
-        chamados.pop(id)
-      
-    return render(request, "core/fechar.html", {"message": "O chamado foi fechado com sucesso!"})
-    
-def Exibirfechar (request, id):
-    if 0 <= id < len(chamados):
-        chamados.pop(id)
-    return render(request, "core/fechar.html", {"message": "O chamado foi fechado com sucesso!"})
-    
-
-def novoChamado(request):
-    if request.method == 'POST':
-        id = request.POST.get('id')
-        Setor = request.POST.get('Setor')
-        problema = request.POST.get('problema')
-        prioridade = request.POST.get('prioridade')
-        descricao = request.POST.get('descricao')
-        
-        print("Chegou um POST")
-        print(f"Setor: {Setor}, problema: {problema}, prioridade: {prioridade}, descricao: {descricao}")
-        chamados.append({
-             "Setor": Setor,
-             "problema": problema,
-             "prioridade": prioridade, # ou "Media"
-             "descricao": descricao })
-        
-        return redirect('listar')
-     
-    if request.method == "GET":
-        print("Chegou um GET")
-        return render(request, 'core/novochamado.html')
-        
-       
-# Create your views here.

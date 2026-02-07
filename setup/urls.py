@@ -27,8 +27,8 @@ urlpatterns = [
     path('', home),
     path('listar_chamados/', listarChamados),
     path('novoChamado', novoChamado),
-    path('fechar/<int>:id>', fechar , name='fechar_chamado'),
+    path('fechar_chamado/<int:id>', fechar , name='fechar_chamado'),
     path('listar_categorias', listar_categorias),
     path('nova_categoria', nova_categoria),
-    path('excluir_categoria/<int>:id', nova_categoria, name='excluir_categoria'),
+    path('excluir_categoria/<int:id>', excluir_categoria, name='excluir_categoria'),
 ]
