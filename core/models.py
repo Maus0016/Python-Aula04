@@ -33,39 +33,39 @@ class Categoria(models.Model):
     def _str_(self):
         return f"{self.nome}"
     
-    class Equipamento(models.Model):
-        descricao = models.CharField(max_length=250)
-        tipo = models.CharField(max_length=50)
-        ocupado =models.BooleanField()
+class Equipamento(models.Model):
+    descricao = models.CharField(max_length=250)
+    tipo = models.CharField(max_length=50)
+    ocupado =models.BooleanField()
 
-        OPCOES_CONDICAO = [
-            ('Novo', 'Novo'),
-            ('Usado', 'Usado'),
-            ('Defeituiso', 'Defeituoso'),
+    OPCOES_CONDICAO = [
+        ('Novo', 'Novo'),
+        ('Usado', 'Usado'),
+        ('Defeituiso', 'Defeituoso'),
 
-        ] 
-        condicao = models.CharField(max_length=50, choices=OPCOES_CONDICAO, default='Novo')
+    ] 
+    condicao = models.CharField(max_length=50, choices=OPCOES_CONDICAO, default='Novo')
 
-        data_criacao = models.DateTimeField(auto_now_add=True)
+    data_criacao = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
-        return f"{self.descricao} - {self.tipo}"
-    
-    class Pessoa(models.Model):
-        cpf = models.IntegerField()
-        rg = models.IntegerField()
-        nome = models.CharField(max_length=15)
-        sobrenome = models.CharField(max_length=15)
-        idade = models.IntegerField()
-        telefone = models.IntegerField()
-        email = models.EmailField()
-        dt_nascimento = models.DateField()
-        cep = models.IntegerField()
-        endereco = models.CharField(max_length=20)
-        complemento = models.TextField(max_length=60)
-        status = models.BooleanField() # Online/Off
+def _str_(self):
+    return f"{self.descricao} - {self.tipo}"
 
-        data_criacao = models.DateTimeField(auto_now_add=True)
+class Pessoa(models.Model):
+    cpf = models.IntegerField()
+    rg = models.IntegerField()
+    nome = models.CharField(max_length=15)
+    sobrenome = models.CharField(max_length=15)
+    idade = models.IntegerField()
+    telefone = models.IntegerField()
+    email = models.EmailField()
+    dt_nascimento = models.DateField()
+    cep = models.IntegerField()
+    endereco = models.CharField(max_length=20)
+    complemento = models.TextField(max_length=60)
+    status = models.BooleanField() # Online/Off
 
-    def _str_(self):
-        return f"{self.descricao} - {self.tipo}"
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+def _str_(self):
+    return f"{self.descricao} - {self.tipo}"
