@@ -1,28 +1,6 @@
 from django.db import models
- 
-class Chamado(models.Model):
-    # Texto curto (max 100 letras)
-    Setor = models.CharField(max_length=100)
-    
-    # Texto longo (sem limite de letras)
-    descricao = models.TextField()
-    
-    # Escolhas pré-definidas
-    OPCOES_PRIORIDADE = [
-        ('Baixa', 'Baixa'),
-        ('Média', 'Média'),
-        ('Alta', 'Alta'),
-    ]
-    prioridade = models.CharField(max_length=10, choices=OPCOES_PRIORIDADE, default='Média')
-    
-    # Data e Hora automática no momento da criação
-    data_criacao = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
-        return f"{self.Setor} - {self.prioridade}"
-    
 
-    
 class Categoria(models.Model):
     # Texto curto (max 100 letras)
     nome = models.CharField(max_length=100)
@@ -69,3 +47,31 @@ class Pessoa(models.Model):
 
 def _str_(self):
     return f"{self.descricao} - {self.tipo}"
+
+class Chamado(models.Model):
+    Categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    Equipamento = models.ForeignKey(Equipamento, on_delete=models.SET_NULL, null=True)
+    Pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True)
+
+    # Texto curto (max 100 letras)
+    Setor = models.CharField(max_length=100)
+
+    
+    
+    # Texto longo (sem limite de letras)
+    descricao = models.TextField()
+    
+    # Escolhas pré-definidas
+    OPCOES_PRIORIDADE = [
+        ('Baixa', 'Baixa'),
+        ('Média', 'Média'),
+        ('Alta', 'Alta'),
+    ]
+    prioridade = models.CharField(max_length=10, choices=OPCOES_PRIORIDADE, default='Média')
+    
+    # Data e Hora automática no momento da criação
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    def _str_(self):
+        return f"{self.Setor} - {self.prioridade}"
+    

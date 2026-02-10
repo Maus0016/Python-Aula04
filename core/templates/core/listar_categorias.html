@@ -15,6 +15,7 @@
             <th>{{ categoria.id }}</th>
             <td>{{ categoria.nome }}</td>
             <td>
+                 <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-outline btn-sm">Editar</a>
                 <a href="{% url 'excluir_categoria' categoria.id %}" class="btn btn-danger btn-sm">Excluir</a>
         </tr>
         {% endfor %}
