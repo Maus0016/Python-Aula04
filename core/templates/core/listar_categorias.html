@@ -1,24 +1,35 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Numero do Chamado</th>
-            <th scope="col">Titulo do Chamado</th>
-            <th scope="col">Opçoes</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for categoria in categorias %}
-        <tr>
-            <th>{{ categoria.id }}</th>
-            <td>{{ categoria.nome }}</td>
-            <td>
-                 <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-outline btn-sm">Editar</a>
-                <a href="{% url 'excluir_categoria' categoria.id %}" class="btn btn-danger btn-sm">Excluir</a>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-primary mb-4">Lista de Categrias</h1>
+        <a href="/nova-categoria" class="btn btn-sm btn-outline-primary">Criar categoria</a>
+    </div>
+
+    <table class="table table-striped table-hover shadow-sm bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+            <tr>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nome }}</td>
+                <td>
+                    <a href="{% url 'editar-categoria' categoria.id %}" class="btn btn-sm btn-outline-primary">
+                        Editar
+                    </a>
+                    <a href="{% url 'excluir-categoria' categoria.id %}" class="btn btn-sm btn-outline-danger"
+                        onclick="return confirm('Tem certeza que deseja apagar?')">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

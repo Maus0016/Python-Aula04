@@ -1,21 +1,24 @@
-{% extends 'core/base.html' %}
+{% extends "core/base.html" %}
 
 {% block content %}
 <div class="container py-5">
-        <h1 class="mb-4">📋 Lista de Chamados</h1>
-
+        <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="text-primary mb-4">Lista de Chamados</h1>
+                <a href="/novo-chamado" class="btn btn-sm btn-outline-primary">Criar chamado</a>
+        </div>
         <table class="table table-striped table-hover shadow-sm bg-white">
                 <thead class="table-dark">
                         <tr>
-                                <th>Setor</th>
+                                <th>Laboratório</th>
                                 <th>Problema</th>
                                 <th>Prioridade</th>
+                                <th>Ação</th>
                         </tr>
                 </thead>
                 <tbody>
                         {% for chamado in chamados %}
                         <tr>
-                                <td>{{ chamado.Setor }}</td>
+                                <td>{{ chamado.laboratorio }}</td>
                                 <td>{{ chamado.descricao }}</td>
                                 <td>
                                         {% if chamado.prioridade == "Alta" %}
@@ -27,13 +30,23 @@
                                         {% endif %}
                                 </td>
                                 <td>
-                                        <a href="{% url 'fechar_chamado' chamado.id %}"
-                                                class="btn btn-sm btn-outline-primary"
-                                                onclick="return confirm('Tem certeza que deseja apagar?')">Excluir</a>
+                                        <a href="{% url 'editar-chamado' chamado.id %}"
+                                                class="btn btn-sm btn-outline-primary">
+                                                Editar
+                                        </a>
+
+
+                                        <form method="post" action="{% url 'fechar-chamado' chamado.pk %}"
+                                                style="display:inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                        🗑 Fechar
+                                                </button>
+                                        </form>
                                 </td>
                         </tr>
                         {% endfor %}
                 </tbody>
         </table>
 </div>
-{% endblock%}
+{% endblock %}

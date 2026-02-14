@@ -1,26 +1,25 @@
-{% extends 'core/base.html' %}
+{% extends "core/base.html" %}
+
 
 {% block content %}
-
 <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-                <h4 class="mb-0"> Novo Chamado </h4>
+                <h4 class="mb-0">Abertura de Chamado Técnico</h4>
         </div>
-
         <div class="card-body">
                 <form method="POST">
                         {% csrf_token %}
 
                         <div class="mb-3">
-                                <label class="form-label fw-bold">Setor:</label>
-                                <input type="text" name="Setor" class="form-control" placeholder="Digite o Setor"
-                                        required>
+                                <label class="form-label fw-bold">Laboratório:</label>
+                                <input type="text" name="laboratorio" class="form-control"
+                                        placeholder="Ex: Laboratório 01" required>
                         </div>
 
                         <div class="mb-3">
                                 <label class="form-label fw-bold">Problema:</label>
                                 <input type="text" name="descricao" class="form-control"
-                                        placeholder="Descrição do Chamado" required>
+                                        placeholder="Descreva o defeito" required>
                         </div>
 
                         <div class="mb-3">
@@ -31,7 +30,14 @@
                                         <option value="Alta">Alta</option>
                                 </select>
                         </div>
-
+                        <div class="mb-3">
+                                <label class="form-label fw-bold">Categoria:</label>
+                                <select name="categoria" class="form-select">
+                                        {% for cat in categorias %}
+                                        <option value="{{ cat.id }}">{{ cat.nome }}</option>
+                                        {% endfor %}
+                                </select>
+                        </div>
                         <div class="d-grid">
                                 <button type="submit" class="btn btn-success btn-lg">Salvar Chamado</button>
                         </div>

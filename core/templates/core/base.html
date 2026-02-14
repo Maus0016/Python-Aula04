@@ -6,43 +6,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Chamados | Home</title>
+    <title>HelpDesk | Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, #6610f2, #0d6efd);
-            color: white;
-            padding: 60px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
 </head>
 
 <body>
-    <header class="hero-section text-center shadow-sm">
-        <div class="container">
-            <h1 class="display-3 fw-bold"> BEM-VINDO</h1>
-            <p class="lead">Seu sistema de Chamados agora está operacional.</p>
+    <div class="row g-0 min-vh-100">
+        <div class="page-header">
+
+            {% if user.is_authenticated %}
+            <div class="my-3" style="display: flex;">
+                <div class="me-3" style="align-content: center;">
+                    Olá, <strong>{{ user.username }}</strong>
+                </div>
+                <form method="post" action="/admin/logout/">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        Logout
+                    </button>
+                </form>
+            </div>
+            {% else %}
+            <div class="my-3" style="display: flex;">
+                <div class="me-3" style="align-content: center;">
+                    Você não está logado
+                </div>
+                <a href="/admin/login" class="btn btn-primary">
+                    Login
+                </a>
+            </div>
+            {% endif %}
         </div>
-    </header>
 
-    {% block content %}
-    <div>BEM-VINDO do bloco content</div>
-    {% endblock %}
+        <!-- Sidebar -->
+        <div class="col-12 col-md-3 bg-primary text-white d-flex align-items-center justify-content-center">
+            <div class="text-center p-4">
+                <img src="{% static 'core/img/logo.png' %}" alt="Logo" class="img-fluid mb-3" style="max-width: 140px;">
+                <h5 class="fw-bold">HelpDesk</h5>
+                <small>Sistema Interno</small>
+            </div>
+        </div>
 
-    {%block rodape %}
-    <div class="text-center py-4 text-muted">
-        <small>&copy; 2026 - Curso Técnico de Desenvolvimento Web - Rodapé Personalizado</small>
+        <!-- Conteúdo principal -->
+        <div class="col-12 col-md-9 d-flex align-items-center">
+            <header class="w-100 text-center py-5 px-3">
+                <h1 class="display-4 fw-bold mb-3">Hello, Senac!</h1>
+                <p class="lead text-muted mb-4">
+                    Seu sistema de HelpDesk agora tem uma interface moderna.
+                </p>
+
+                <div class="container mt-3">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                {% block content %}
+                <div>BEM-VINDO do bloco content</div>
+                {% endblock %}
+
+                {%block rodape %}
+                <div class="text-center py-4 text-muted">
+                    <small>&copy; 2026 - Curso Técnico de Desenvolvimento Web - Rodapé Personalizado</small>
+                </div>
+                {% endblock %}
+            </header>
+        </div>
+
     </div>
-    {% endblock %}
-
-
-    <!-- Aqui eu quero que apareça meu conteudo  -->
-
-
+    </div>
 </body>
 
 </html>
